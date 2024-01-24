@@ -1,0 +1,76 @@
+﻿@model WebProject001.Models.Expenditure
+
+@{
+    ViewData["Title"] = "Create Expenditure";
+}
+
+
+<h1 class="text-info">Create Expenditure</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="input-group mb-2">
+                <label class="input-group-text" asp-for="ExpenditureDate" style="width: 150px;"></label>
+                <input type="date" class="form-control" asp-for="ExpenditureDate">
+            </div>
+            <div class="input-group mb-2">
+                <span asp-validation-for="ExpenditureDate" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-2">
+                <label class="input-group-text" asp-for="ExpenditureName" style="width: 150px;"></label>
+                <input type="text" class="form-control" asp-for="ExpenditureName">
+            </div>
+            <div class="input-group mb-2">
+                <span asp-validation-for="ExpenditureName" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-2">
+                <label class="input-group-text" asp-for="Price" style="width: 150px;"></label>
+                <input type="text" class="form-control" asp-for="Price">
+            </div>
+            <div class="input-group mb-2">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-2">
+                <label class="input-group-text" asp-for="Quantity" style="width: 150px;"></label>
+                <input type="text" class="form-control" asp-for="Quantity">
+            </div>
+            <div class="input-group mb-2">
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-2">
+                <label class="input-group-text" asp-for="Description" style="width: 150px;"></label>
+                <input type="text" class="form-control" asp-for="Description">
+            </div>
+            <div class="input-group mb-2">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" asp-for="CategoryId" style="width: 150px;"></label>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" asp-for="ShopId" style="width: 150px;"></label>
+                <select asp-for="ShopId" class="form-select" asp-items="ViewBag.ShopId"></select>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" asp-for="PaymentMethodId" style="width: 150px;"></label>
+                <select asp-for="PaymentMethodId" class="form-select" asp-items="ViewBag.PaymentMethodId"></select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success" type="submit">
+                    <i class="bi bi-folder-plus"></i>&nbsp;&nbsp;Create Expenditure
+                </button>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-secondary" asp-action="Index">
+                    <i class="bi bi-ban"></i>&nbsp;&nbsp;Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

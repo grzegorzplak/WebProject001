@@ -1,0 +1,117 @@
+﻿@model PaginatedList<WebProject001.Models.Shop>
+
+@{
+    ViewData["Title"] = "Shops";
+}
+
+<form asp-action="Index" method="get">
+    <div class="w-100 card border-0 p-4">
+        <div class="card-header bg-dark bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">Shops</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body border p-4">
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group mb-3 col-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Find by name</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="SearchShopName" value="@ViewData["CurrentShopName"]">
+                    </div>
+                </div>
+                <div class="col-5">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Search</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-primary" asp-action="Index"><i class="bi bi-arrow-counterclockwise"></i>Back to Full List</a>
+                </div>
+                <div class="col-3 text-end">
+                    <a class="btn btn-success" asp-action="Create">
+                        <i class="bi bi-bag-plus-fill"></i> Create New Shop
+                    </a>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["SortByShopName"]">Shop Name</a>
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            City
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ShopName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AddressLine)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="text-warning text-decoration-none"><i class="bi bi-pencil"></i> Edit</a>&nbsp;&nbsp;&nbsp;
+                                <a asp-action="Details" asp-route-id="@item.Id" class="text-info text-decoration-none"><i class="bi bi-binoculars"></i>Details</a>&nbsp;&nbsp;&nbsp;
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger text-decoration-none"><i class="bi bi-trash"></i>Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="page-link @prevDisabled">
+                Previous
+            </a>
+        </li>
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item">
+                @if (i != Model.PageIndex)
+                {
+                    <a asp-action="Index" asp-route-pageNumber="@(i)" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" class="page-link">@i</a>
+                }
+                else
+                {
+                    <span class="page-link text-dark">@i</span>
+                }
+            </li>
+        }
+        <li class="page-item">
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="page-link @nextDisabled">
+                Next
+            </a>
+        </li>
+    </ul>
+</nav>

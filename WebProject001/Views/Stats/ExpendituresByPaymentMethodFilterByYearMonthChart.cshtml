@@ -1,0 +1,80 @@
+﻿<div>
+    <h1 class="text-info">Expenditures by Payment Method Name filter by Year & Month</h1>
+</div>
+<div>
+    <div class="col-md-4">
+        <form asp-controller="Stats" asp-action="ExpendituresByPaymentMethodFilterByYearMonthChart">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Choose year & month: </span>
+                </div>
+                <select name="criteria" id="criteria" class="form-select" asp-items="ViewBag.YearMonth"></select>
+                <input type="submit" value="Show" class="btn btn-info text-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <canvas id="myChart" style="height: 400px;"></canvas>
+</div>
+
+<div class="justify-content-center text-center chart-spinner" style="display:none">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".chart-spinner").show();
+
+        var criteria = $("#criteria").val();
+        if (criteria == null) {
+            criteria = "";
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Stats/GetDataForExpendituresByPaymentMethodFilterByYearMonthChart",
+            data: { criteria: criteria },
+            contextType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessResult,
+            error: OnError
+        });
+
+        function OnSuccessResult(data) {
+            var _data = data;
+            var _chartLabels = _data[0];
+            var _chartData = _data[1];
+            new Chart("myChart",
+                {
+                    type: "bar",
+                    data: {
+                        labels: _chartLabels,
+                        datasets: [{
+                            label: 'Payment Method',
+                            borderColor: "rgb(13, 202, 240)",
+                            backgroundColor: "rgba(13, 202, 240, 0.7)",
+                            data: _chartData
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                    }
+                }
+            );
+            $(".chart-spinner").hide();
+        }
+
+        function OnError(err) {
+
+        }
+    });
+</script>
+
+
+

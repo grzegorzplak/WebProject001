@@ -1,0 +1,36 @@
+﻿@model WebProject001.Models.PaymentMethod
+
+@{
+    ViewData["Title"] = "Edit Payment Method";
+}
+
+<h1 class="text-info">Edit Payment Method</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="input-group mb-2">
+                <label class="input-group-text" asp-for="Name"></label>
+                <input type="text" class="form-control" asp-for="Name">
+            </div>
+            <div class="input-group mb-2">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-warning text-dark" type="submit">
+                    <i class="bi bi-pen"></i>&nbsp;&nbsp;Update Payment Method
+                </button>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-secondary" asp-action="Index">
+                    <i class="bi bi-ban"></i>&nbsp;&nbsp;Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

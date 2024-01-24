@@ -1,0 +1,58 @@
+﻿@model WebProject001.Models.Expenditure
+
+@{
+    ViewData["Title"] = "Delete Expenditure";
+}
+
+<h1 class="text-info">Delete Expenditure</h1>
+
+<hr />
+<h3>Are you sure you want to delete this?</h3>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <div class="input-group mb-3">
+                <label class="input-group-text" asp-for="ExpenditureDate" style="width: 150px;"></label>
+                <input disabled type="date" class="form-control" asp-for="ExpenditureDate">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" asp-for="ExpenditureName" style="width: 150px;"></label>
+                <input disabled type="text" class="form-control" asp-for="ExpenditureName">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" asp-for="Price" style="width: 150px;"></label>
+                <input disabled type="text" class="form-control" asp-for="Price">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" asp-for="Quantity" style="width: 150px;"></label>
+                <input disabled type="text" class="form-control" asp-for="Quantity">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" asp-for="Description" style="width: 150px;"></label>
+                <input disabled type="text" class="form-control" asp-for="Description">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" style="width: 150px;">@Html.DisplayNameFor(model => model.Category)</label>
+                <input disabled type="text" class="form-control" value="@Html.DisplayFor(model => model.Category.CategoryName)">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" style="width: 150px;">@Html.DisplayNameFor(model => model.Shop)</label>
+                <input disabled type="text" class="form-control" value="@Html.DisplayFor(model => model.Shop.ShopName)">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" style="width: 150px;">@Html.DisplayNameFor(model => model.PaymentMethod)</label>
+                <input disabled type="text" class="form-control" value="@Html.DisplayFor(model => model.PaymentMethod.Name)">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger text-warning" type="submit">
+                    <i class="bi bi-trash3"></i>&nbsp;&nbsp;Delete Shop
+                </button>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-secondary" asp-action="Index">
+                    <i class="bi bi-ban"></i>&nbsp;&nbsp;Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

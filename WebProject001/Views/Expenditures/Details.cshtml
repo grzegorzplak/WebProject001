@@ -1,0 +1,54 @@
+﻿@model WebProject001.Models.Expenditure
+
+@{
+    ViewData["Title"] = "Expenditure's Details";
+}
+
+<h1 class="text-info">Expenditure's Details</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <input type="hidden" asp-for="Id" />
+        <div class="input-group mb-3">
+            <label class="input-group-text" asp-for="ExpenditureDate" style="width: 150px;"></label>
+            <input disabled type="date" class="form-control" asp-for="ExpenditureDate">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" asp-for="ExpenditureName" style="width: 150px;"></label>
+            <input disabled type="text" class="form-control" asp-for="ExpenditureName">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" asp-for="Price" style="width: 150px;"></label>
+            <input disabled type="text" class="form-control" asp-for="Price">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" asp-for="Quantity" style="width: 150px;"></label>
+            <input disabled type="text" class="form-control" asp-for="Quantity">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" asp-for="Description" style="width: 150px;"></label>
+            <input disabled type="text" class="form-control" asp-for="Description">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" style="width: 150px;">@Html.DisplayNameFor(model => model.Category)</label>
+            <input disabled type="text" class="form-control" value="@Html.DisplayFor(model => model.Category.CategoryName)">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" style="width: 150px;">@Html.DisplayNameFor(model => model.Shop)</label>
+            <input disabled type="text" class="form-control" value="@Html.DisplayFor(model => model.Shop.ShopName)">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" style="width: 150px;">@Html.DisplayNameFor(model => model.PaymentMethod)</label>
+            <input disabled type="text" class="form-control" value="@Html.DisplayFor(model => model.PaymentMethod.Name)">
+        </div>
+        <div class="form-group">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning text-dark">
+                <i class="bi bi-pencil"></i>&nbsp;&nbsp;Edit Expenditure
+            </a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-secondary" asp-action="Index">
+                <i class="bi bi-ban"></i>&nbsp;&nbsp;Back to List
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebProject001.ViewModels.ExpenditureByYearMonth>
+
+<h1 class="text-info">Expenditures By Year & Month</h1>
+
+@if(Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Year Month</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.YearMonth</td>
+                <td>@String.Format("{0:n2}", item.Total)</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="row">
+        There is no data 
+    </div>
+}
